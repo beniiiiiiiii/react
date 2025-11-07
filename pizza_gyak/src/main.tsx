@@ -7,6 +7,7 @@ import EditPizza from "./pages/EditPizza.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Index from "./pages/index.tsx";
 import AllPizza from "./pages/AllPizza.tsx";
+import { ToastContainer } from "react-toastify";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -19,5 +20,6 @@ createRoot(document.getElementById("root")!).render(
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
+    <ToastContainer />
   </StrictMode>
 );

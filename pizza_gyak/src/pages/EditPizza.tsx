@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import type { Pizza } from "../types/Pizza";
 import apiClient from "../api/apiClient";
 import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const EditPizza = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ const EditPizza = () => {
         setAr(response.data.ar ?? 0);
         setImageUrl(response.data.imageUrl ?? "");
       })
-      .catch((result) => console.error(result));
+      .catch(() => toast.error("Hiba történt a pizzak betöltése során"));
   }, [id]);
 
   const submit = () => {
@@ -32,8 +33,21 @@ const EditPizza = () => {
     };
     apiClient
       .put(`/pizzak/${id}`, p)
-      .then((response) => alert(response.status))
-      .catch((result) => console.error(result));
+      .then(() => toast.success("Sikeres változások"))
+      .catch(() => toast.error("Hibá történt a változtatásnál"));
+  };
+
+  const deleteFunc = () => {
+    const p: Pizza = {
+      nev,
+      leiras,
+      ar,
+      imageUrl,
+    };
+    apiClient
+      .delete(`/pizzak/${id}`)
+      .then(() => toast.success("Sikeres törlés"))
+      .catch(() => toast.error("Sikertelen Törlés"));
   };
 
   return (
@@ -83,6 +97,7 @@ const EditPizza = () => {
         </tr>
       </table>
       <button onClick={submit}>Módosítás</button>
+      <button onClick={deleteFunc}>Törlés</button>
       <Link to={"/home"}>
         <button>Home</button>
       </Link>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import type { Pizza } from "../types/Pizza";
 import apiClient from "../api/apiClient";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const NewPizza = () => {
   const [nev, setNev] = useState<string>("");
@@ -22,8 +23,8 @@ const NewPizza = () => {
     } else {
       apiClient
         .post("/pizzak", p)
-        .then((response) => alert(response.status))
-        .catch((result) => console.error(result));
+        .then(() => toast.success("Sikeresen hozzáadva"))
+        .catch(() => toast.error("Hiba történt"));
     }
   };
 
