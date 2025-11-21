@@ -62,7 +62,7 @@ const NewPizza = () => {
         </tr>
       </table>
       <button onClick={addPizza}>Hozzáadás</button>
-      <Link to={"/home"}>
+      <Link to={"/"}>
         <button>Home</button>
       </Link>
     </>

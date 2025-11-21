@@ -98,7 +98,7 @@ const EditPizza = () => {
       </table>
       <button onClick={submit}>Módosítás</button>
       <button onClick={deleteFunc}>Törlés</button>
-      <Link to={"/home"}>
+      <Link to={"/"}>
         <button>Home</button>
       </Link>
     </>

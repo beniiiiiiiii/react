@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound.tsx";
 import Index from "./pages/index.tsx";
 import AllPizza from "./pages/AllPizza.tsx";
 import { ToastContainer } from "react-toastify";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -15,7 +16,7 @@ createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route path="/edit-pizza/:id" element={<EditPizza />} />
         <Route path="/new-pizza" element={<NewPizza />} />
-        <Route path="/home" element={<Index />} />
+        <Route path="/" element={<Index />} />
         <Route path="/pizzak" element={<AllPizza />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
