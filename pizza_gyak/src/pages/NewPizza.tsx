@@ -1,4 +1,3 @@
-import "../App.css";
 import { useState } from "react";
 import type { Pizza } from "../types/Pizza";
 import apiClient from "../api/apiClient";

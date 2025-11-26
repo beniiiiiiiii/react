@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "../App.css";
 import apiClient, { BACKEND_URL } from "../api/apiClient.ts";
 import type { Pizza } from "../types/Pizza.ts";
 import { Link } from "react-router-dom";
@@ -12,12 +11,20 @@ import { useNavigate } from "react-router-dom";
 function App() {
   const [pizzak, setPizzak] = useState<Pizza[]>([]);
 
+  const [kosar, setKosar] = useState<Array<number>>(
+    JSON.parse(localStorage.getItem("kosar") ?? "[]")
+  );
+
   useEffect(() => {
     apiClient
       .get("/pizzak")
       .then((respone) => setPizzak(respone.data))
       .catch(() => toast.error("Hiba történt a pizzák betöltése során"));
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("kosar", JSON.stringify(kosar));
+  }, [kosar]);
 
   const generateCard = (p: Pizza) => {
     return (
@@ -30,6 +37,14 @@ function App() {
             <Link to={`/edit-pizza/${p.id}`}>
               <Button>Edit</Button>
             </Link>
+            <Button
+              onClick={() => {
+                setKosar([...kosar, Number(p.id)]);
+                toast.success("Sikeresen a kosárba helyezve");
+              }}
+            >
+              Kosárba
+            </Button>
           </Card.Body>
         </Card>
       </Col>
